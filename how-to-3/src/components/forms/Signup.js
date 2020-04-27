@@ -1,9 +1,20 @@
-import React from 'react'
+import React,{useState} from 'react'
+import styled from 'styled-components'
+import * as yup from 'yup'
+
+
+
+const Form = styled.form `
+
+`   
 
 export default function Signup() {
     return (
-        <div>
+        <Form>
+            <label htmlFor='username'>
+                UserName
+            </label>
             
-        </div>
+        </Form>
     )
 }
