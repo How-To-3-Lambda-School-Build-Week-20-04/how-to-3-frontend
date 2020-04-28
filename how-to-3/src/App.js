@@ -43,7 +43,7 @@ const initialLogin = {
 function App() {
   const [signupData,setSignupData] =useState(initialSignup)
   const [loginData,setLoginData] = useState(initialLogin)
-  const [userLoggedIn,setUserLoggedIn] = useState(false)
+  const [userLoggedIn,setUserLoggedIn] = useState({})
 
   const onChangeHandle = evt =>{
     const name = evt.target.name

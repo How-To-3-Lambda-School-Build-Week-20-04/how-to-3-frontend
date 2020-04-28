@@ -3,7 +3,7 @@ import Axios from 'axios'
 
 import UserAside from '../aside/UserAside'
 import UserNav from '../navs/UserNav'
-import CreateTodo from '../todos/CreateTodo'
+
 import Todos from '../todos/Todos'
 
 const url =''
@@ -12,8 +12,10 @@ const url =''
 
 
 export default function UserhomePage(props) {
+
     const [toDos,setToDos] = useState([])
     //useEffect for getting the logged in users  to do's andsetting them to{ toDos}
+
     useEffect(()=>{
         Axios.get(url)
         .then((res)=>{
@@ -25,14 +27,18 @@ export default function UserhomePage(props) {
     
         })
     },[])
+
+    const addTodo = newTodo =>{
+        setToDos([...setToDos,newTodo])
+    }
     
     return (
         <div>
             <UserNav/>
 
             <div>
-            <UserAside/>
-            <CreateTodo/>
+                <UserAside addTodo={addTodo}/>
+                
             </div>
 
             <div>
