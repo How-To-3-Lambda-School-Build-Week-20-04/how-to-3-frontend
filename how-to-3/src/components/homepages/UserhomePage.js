@@ -1,8 +1,47 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
+import Axios from 'axios'
 
-export default function UserhomePage() {
+import UserAside from '../aside/UserAside'
+import UserNav from '../navs/UserNav'
+import CreateTodo from '../todos/CreateTodo'
+import Todos from '../todos/Todos'
+
+const url =''
+
+
+
+
+export default function UserhomePage(props) {
+    const [toDos,setToDos] = useState([])
+    //useEffect for getting the logged in users  to do's andsetting them to{ toDos}
+    useEffect(()=>{
+        Axios.get(url)
+        .then((res)=>{
+            setToDos([...toDos,res.data])
+    
+        })
+        .catch((err)=>{
+            alert('An error happened while loading To Do')
+    
+        })
+    },[])
+    
     return (
         <div>
+            <UserNav/>
+
+            <div>
+            <UserAside/>
+            <CreateTodo/>
+            </div>
+
+            <div>
+                {toDos.map(todo=>{
+                return    <Todos todoInfo={todo}/>
+                })}
+            </div>
+            
+
             
         </div>
     )

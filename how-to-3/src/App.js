@@ -1,15 +1,19 @@
 import React,{useState} from 'react';
-import {BrowserRouter as Router,Route,Switch } from 'react-router-dom'
+import {BrowserRouter as Router,Route,Switch,Link } from 'react-router-dom'
 import * as yup from 'yup'
 import axios from 'axios'
+import styled from 'styled-components'
 
 //Component Imports
 import Login from './components/forms/Login'
 import Signup from './components/forms/Signup'
+import UserhomePage from './components/homepages/UserhomePage';
+import Landing from './components/homepages/Landing'
+
 
 //Css Import
 import './App.css';
-import UserhomePage from './components/homepages/UserhomePage';
+
 
 //database url
 const url = 'https://how-to-application.herokuapp.com/'
@@ -31,14 +35,30 @@ const initialSignup = {
 
 }
 
+const initialLogin = {
+  username:'',
+  password:'',
+}
+
 function App() {
   const [signupData,setSignupData] =useState(initialSignup)
-  const [loginData,setLoginData] = useState(null)
+  const [loginData,setLoginData] = useState(initialLogin)
+  const [userLoggedIn,setUserLoggedIn] = useState(false)
 
   const onChangeHandle = evt =>{
     const name = evt.target.name
     const value = evt.target.value
     setSignupData({...signupData,
+      [name] :value
+      
+      })
+    
+  }
+
+  const onLoginChange = evt =>{
+    const name = evt.target.name
+    const value = evt.target.value
+    setLoginData({...loginData,
       [name] :value
       
       })
@@ -63,8 +83,12 @@ function App() {
     <Router>
       <div className="App">
 
+        
+
+
         <Switch>
-          <Route path='/:user/homepage'>
+
+          <Route path='/:user/homepage' >
             <UserhomePage
             
             
@@ -83,6 +107,8 @@ function App() {
           <Route path='/login'>
             <Login
             //Login Props 
+            onLoginChange={onLoginChange}
+            loginData = {loginData}
 
             
             />
