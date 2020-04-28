@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import CreateTodo from '../todos/CreateTodo'
 
 const Aside = styled.div `
-    position:relative;
+    position:fixed;
     top:20%;
-    width:20vw;
+    width:fit-content;
     background:lightblue;
 
 `
@@ -13,10 +13,7 @@ const initialNewTodo = {
     title:'',
     subtitle:'',
     description:'',
-    file: {
-        img:[],
-        video:[],
-    }
+    file: {}
 
 }
 
@@ -41,8 +38,13 @@ export default function UserAside(props) {
 
     }
 
+    const postNewtodo = evt=>{
+        addTodo(newTodo)
+        setNewTodo(initialNewTodo)
+    }
+
    
-    console.log(newTodo)
+    
     return (
         <Aside>
             <div>
@@ -70,7 +72,7 @@ export default function UserAside(props) {
                 </ul>
             </div>
             <CreateTodo onInputChange={onInputChange} onFileChange={onFileChange} newTodo={newTodo}/>
-            <button>Create To Do</button>
+            <button onClick={postNewtodo}>Create To Do</button>
         </Aside>
     )
 }

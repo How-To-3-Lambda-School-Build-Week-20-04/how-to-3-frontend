@@ -44,6 +44,7 @@ function App() {
   const [signupData,setSignupData] =useState(initialSignup)
   const [loginData,setLoginData] = useState(initialLogin)
   const [userLoggedIn,setUserLoggedIn] = useState({})
+  const [isUserLoggedIn,setIsUserLoggedIn]= useState(false)
 
   const onChangeHandle = evt =>{
     const name = evt.target.name
@@ -91,7 +92,7 @@ function App() {
           <Route path='/:user/homepage' >
             <UserhomePage
             
-            
+            userLoggedIn = {userLoggedIn}
             />
           </Route>
           
