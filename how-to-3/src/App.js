@@ -1,25 +1,130 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useState} from 'react';
+import {BrowserRouter as Router,Route,Switch,Link } from 'react-router-dom'
+import * as yup from 'yup'
+import axios from 'axios'
+import styled from 'styled-components'
+
+//Component Imports
+import Login from './components/forms/Login'
+import Signup from './components/forms/Signup'
+import UserhomePage from './components/homepages/UserhomePage';
+import Landing from './components/homepages/Landing'
+
+
+//Css Import
 import './App.css';
 
+
+//database url
+const url = 'https://how-to-application.herokuapp.com/'
+const postNewUser= url+'/api/auth/register'
+
+
+//Yup validatiaon requirements
+const formSchema = yup.object().shape({
+  username:yup
+  .string()
+  .required('Create a new user name ')
+
+})
+
+const initialSignup = {
+  username:'',
+  email:'',
+  password:'',
+
+}
+
+const initialLogin = {
+  username:'',
+  password:'',
+}
+
 function App() {
+  const [signupData,setSignupData] =useState(initialSignup)
+  const [loginData,setLoginData] = useState(initialLogin)
+  const [userLoggedIn,setUserLoggedIn] = useState({})
+
+  const onChangeHandle = evt =>{
+    const name = evt.target.name
+    const value = evt.target.value
+    setSignupData({...signupData,
+      [name] :value
+      
+      })
+    
+  }
+
+  const onLoginChange = evt =>{
+    const name = evt.target.name
+    const value = evt.target.value
+    setLoginData({...loginData,
+      [name] :value
+      
+      })
+    
+  }
+  const onSignup = evt =>{
+    evt.preventDefault()
+    axios.post(postNewUser,signupData)
+    .then(res=>{
+      console.log(res.data + 'success')
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+
+    setSignupData(initialSignup)
+
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+
+        
+
+
+        <Switch>
+
+          <Route path='/:user/homepage' >
+            <UserhomePage
+            
+            
+            />
+          </Route>
+          
+          <Route path='/signup'>
+          <Signup
+          //Signup Props
+          onChangeHandle= {onChangeHandle}
+          onSignup = {onSignup}
+          signupData ={signupData}
+          />
+          </Route>
+          
+          <Route path='/login'>
+            <Login
+            //Login Props 
+            onLoginChange={onLoginChange}
+            loginData = {loginData}
+
+            
+            />
+          </Route>
+
+          <Route path='/'>
+            <Landing
+            
+            />
+
+          </Route>
+
+        </Switch>
+        
+      </div>
+    </Router>
   );
 }
 
