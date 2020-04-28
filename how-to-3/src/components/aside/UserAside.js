@@ -40,6 +40,8 @@ export default function UserAside(props) {
         })
 
     }
+
+   
     console.log(newTodo)
     return (
         <Aside>
@@ -67,7 +69,7 @@ export default function UserAside(props) {
                    
                 </ul>
             </div>
-            <CreateTodo onInputChange={onInputChange} />
+            <CreateTodo onInputChange={onInputChange} onFileChange={onFileChange} newTodo={newTodo}/>
             <button>Create To Do</button>
         </Aside>
     )
