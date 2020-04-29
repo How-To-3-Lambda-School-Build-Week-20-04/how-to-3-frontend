@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import { axiosWithAuth } from "../../utilities/axiosWithAuth";
-import Register from './Register';
-import LandingNav from '../navs/LandingNav'
 
-const Login = props => {
+import LandinigNav from '../navs/LandingNav'
+import LandingNav from "../navs/LandingNav";
+
+const Register = props => {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -21,17 +22,17 @@ const Login = props => {
   const handleSubmit = e => {
     e.preventDefault();
     axiosWithAuth()
-    .post("/api/auth/login", credentials)
+    .post("/api/auth/register", credentials)
     .then(res => {
       console.log(res);
       localStorage.setItem('token', res.data.payload);
-      props.history.push('/:username/homepage');
+      props.history.push('/login');
     })
   }
   return (
     <>
     <LandingNav/>
-     <div className='container'>
+      <div className='container'>
         <h1>How To App</h1>
         <div>
           <form onSubmit={handleSubmit}>
@@ -51,13 +52,20 @@ const Login = props => {
               onChange={handleChange}
             />
             <br/>
-            {/* <button exact path="/register" component={Register}>Register Here</button> */}
-            <button>Log in</button>
+            <input 
+              type='email'
+              name='email'
+              placeholder='Email'
+              value={credentials.email}
+              onChange={handleChange}
+            />
+            <br/>
+            <button>Sign Up</button>
           </form>
         </div>
-     </div>
+      </div>
     </>
   );
 };
 
-export default Login;
+export default Register;

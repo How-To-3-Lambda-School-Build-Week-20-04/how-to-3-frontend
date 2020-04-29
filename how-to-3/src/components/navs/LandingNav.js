@@ -14,7 +14,7 @@ export default function LandingNav() {
           </div>
           <div>
             <Link to='/login'>Log in </Link>
-            <Link to='/signup'>Sign Up</Link>
+            <Link to='/register'>Sign Up</Link>
 
           </div>
 
