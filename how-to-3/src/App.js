@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {BrowserRouter as Router,Route,Switch,Link,useRouteMatch } from 'react-router-dom'
+import {BrowserRouter as Router,Route,Switch,Link,useRouteMatch, Redirect } from 'react-router-dom'
 import * as yup from 'yup'
 import axios from 'axios'
 import styled from 'styled-components'
@@ -38,6 +38,10 @@ const initialLogin = {
 function App() {
   const [signupData,setSignupData] =useState(initialSignup)
   const [loginData,setLoginData] = useState(initialLogin)
+  const [loginErrors,setLoginErrors] = useState({
+    email:'',
+    password:''
+  })
   const [userLoggedIn,setUserLoggedIn] = useState({})
   const [isUserLoggedIn,setIsUserLoggedIn]= useState(false)
 
@@ -54,9 +58,36 @@ function App() {
   const onLoginChange = evt =>{
     const name = evt.target.name
     const value = evt.target.value
-    setLoginData({...loginData,
-      [name] :value
-      
+    yup
+    .reach(loginFormscheme,name)
+    .validate(value)
+    .then(valid=>{
+      setLoginErrors({...loginErrors,[name]:''})
+      setLoginData({...loginData,
+        [name] :value
+        
+        })
+    })
+    .catch(err=>{
+      setLoginErrors({...loginErrors,[name] :err.errors[0]})
+    })
+   
+    
+  }
+
+  const onLoginClick = evt=>{
+    evt.preventDefault()
+    axios.post(url,loginData)
+      .then(res=>{
+        setUserLoggedIn(res.data)
+        setIsUserLoggedIn(true)
+        return <Redirect to={`/${res.data.name}/homepage`}/>
+
+      })
+
+      .catch(err=>{
+        return <Redirect to='/signup'/>
+
       })
     
   }
@@ -65,6 +96,7 @@ function App() {
     axios.post(postNewUser,signupData)
     .then(res=>{
       console.log(res.data + 'success')
+      return <Redirect to='/login'/>
     })
     .catch(err=>{
       console.log(err)
@@ -82,7 +114,7 @@ const loginFormscheme = yup.object().shape({
   .required('valid email required')
   .min(5),
   password: yup
-  .string()
+  
   .required('please enter password')
   
 })
@@ -123,6 +155,8 @@ const loginFormscheme = yup.object().shape({
             //Login Props 
             onLoginChange={onLoginChange}
             loginData = {loginData}
+            loginErrors={loginErrors}
+            onLoginClick={onLoginClick}
 
             
             />

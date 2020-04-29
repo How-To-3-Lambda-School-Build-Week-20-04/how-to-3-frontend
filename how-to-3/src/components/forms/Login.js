@@ -7,7 +7,8 @@ import LandingNav from '../navs/LandingNav'
 
 
 export default function Login(props) {
-    const {onLoginChange,loginData} = props
+    const {onLoginChange,loginData,loginErrors,onLoginClick} = props
+    
     return (
         <div>
             <LandingNav/>
@@ -15,6 +16,7 @@ export default function Login(props) {
                 <label htmlFor='Email'>
                     Email 
                 </label>
+                <p> {loginErrors.email} </p>
                 <input name='email' type='email' value={loginData.email} placeholder='Email'onChange={onLoginChange}></input>
             </div>
 
@@ -22,10 +24,11 @@ export default function Login(props) {
                 <label htmlFor='password'>
                     Password
                 </label>
+                <p>{loginErrors.password} </p>
                 <input name='password' type='password' value={loginData.password} placeholder='Password'onChange={onLoginChange}></input>
             </div>
             
-            <button>Login</button>
+            <button onClick={onLoginClick}>Login</button>
         </div>
     )
 }
