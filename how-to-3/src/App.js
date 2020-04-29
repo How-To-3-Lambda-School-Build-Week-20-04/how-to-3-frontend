@@ -1,15 +1,16 @@
 import React,{useState} from 'react';
 import {BrowserRouter as Router,Route,Switch,Link,useRouteMatch, Redirect } from 'react-router-dom'
-import * as yup from 'yup'
-import axios from 'axios'
-import styled from 'styled-components'
+
+import * as yup from 'yup';
+import axios from 'axios';
+import styled from 'styled-components';
 
 //Component Imports
-import Login from './components/forms/Login'
-import Signup from './components/forms/Signup'
+import Login from './components/forms/Login';
+import Signup from './components/forms/Signup';
 import UserhomePage from './components/homepages/UserhomePage';
-import Landing from './components/homepages/Landing'
-import Postpage from './components/postpage/Postpage'
+import Landing from './components/homepages/Landing';
+import Postpage from './components/postpage/Postpage';
 
 
 //Css Import
@@ -111,11 +112,12 @@ const loginFormscheme = yup.object().shape({
   email: yup
   .string()
   .email('must be a valid email ')
-  .required('valid email required')
-  .min(5),
+  .required('valid email required'),
+  
   password: yup
   
-  .required('please enter password')
+    .string()
+    .required()
   
 })
 
