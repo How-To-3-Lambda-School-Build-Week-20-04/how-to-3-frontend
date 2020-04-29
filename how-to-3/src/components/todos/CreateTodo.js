@@ -7,8 +7,31 @@ const CreateDiv = styled.div `
     text-align:center;
     input,textarea{
         text-align:center;
+        background:lightblue;
+        
+        text-shadow:0 0px 1px white;
+        transition: all .2s ease-in-out;
         &:focus{
-            background:lightblue;
+            color:white;
+            background:cornflowerblue;
+            text-shadow:0 0px 2px white;
+        };
+        
+       
+    }
+    textarea{
+        height:7rem;
+    }
+    button{
+        padding:3%;
+        background:cornflowerblue;
+        margin:3% 0;
+        color:white;
+        text-shadow:0 2px 4px whtie;
+        font-size:1rem;
+        transition:all .4 ease-in-out;
+        &:hover{
+            background:lightseagreen
         }
     }
 `
@@ -54,7 +77,8 @@ export default function CreateTodo(props) {
             
             <button onClick={addStep}>Add steps</button>
             <textarea type='text' name='description'  value={newTodo.description} placeholder='Description' onChange={onInputChange}/>
-            <input type='file' name= 'file' value={newTodo.files}   onChange={onFileChange}/>
+            {/* <input type='file' name= 'file' value={newTodo.files}   onChange={onFileChange}/> */}
+            
         </CreateDiv>
     )
 }

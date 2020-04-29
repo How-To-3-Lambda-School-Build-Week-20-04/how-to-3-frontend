@@ -2,6 +2,7 @@ import React,{useEffect,useState,} from 'react'
 import {Link,Switch,Route,BrowserRouter,useRouteMatch} from 'react-router-dom'
 import Axios from 'axios'
 import styled from 'styled-components'
+import gsap from "gsap"
 
 import UserAside from '../aside/UserAside'
 import UserNav from '../navs/UserNav'
@@ -20,6 +21,19 @@ const TodoContainer = styled.div `
     width:90%;
     margin:0 auto;
     padding:3%;
+
+`
+const Button = styled.button `
+    position:fixed;
+    padding:1% .5%;
+    margin-left:.3%;
+    margin-top:.3%;
+    border-radius:25%;
+    box-shadow:-3px -2px .3rem black;
+    font-size:1rem;
+
+    
+
 
 `
 
@@ -45,12 +59,14 @@ export default function UserhomePage(props) {
         })
     },[])
 
-    // const addTodo = newTodo =>{
-    //     setToDos([...toDos,newTodo])
-    // }
+    const addTodo = newTodo =>{
+        setToDos([...toDos,newTodo])
+    }
 
     const showAside = evt=>{
         setasideShow(!asideShow)
+        gsap.from('.gsapDiv',{opacity:0,duration:1})
+        
     }
 
 
@@ -61,33 +77,43 @@ export default function UserhomePage(props) {
 
             <main className='container'>
 
-                <div>
-                    {!asideShow ? <button onClick={showAside}>show menu</button> : <UserAside />}
-                    
-                    {asideShow ? <button onClick={showAside}>hide menu</button>:null}
-                </div>
-                
-                <div>
-                   
+            <Switch>
+                  <Route >
+                        <div className='asideDiv'>
+                            {!asideShow ? <Button onClick={showAside} >show menu</Button> : <UserAside addTodo={addTodo} />}
                             
-                                <TodoContainer onMouseEnter={evt=>{setasideShow(false)}}>
-                                    {toDos.map(todo=>{
-                                    return (  
+                            {asideShow ? <Button onClick={showAside}>hide menu</Button>:null}
+                            
+                        </div>
+                        
+                        <div>
+                           
                                     
-                                         
-                                             <Todos todoInfo={todo} userLoggedIn={userLoggedIn}/>
-                                         
-                                    )
-                                    })}
-                                </TodoContainer>
+                                        <TodoContainer >
+                                            {toDos.map(todo=>{
+                                            return (  
+                                            
+                                                 
+                                                     <Todos todoInfo={todo} userLoggedIn={userLoggedIn}/>
+                                                 
+                                            )
+                                            })}
+                                        </TodoContainer>
+                                    
+                                
+                                    
+                                
+                       
                             
-                        
-                            
-                        
-               
-                    
-                </div>
+                        </div>
+                  </Route>
                 
+                  <Route path = { `/post/:posttitle`}>
+                                
+                <Postpage/>
+                </Route>
+                    
+            </Switch>
                 
             </main>
             

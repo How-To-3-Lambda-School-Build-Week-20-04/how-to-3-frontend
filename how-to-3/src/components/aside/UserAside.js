@@ -4,9 +4,38 @@ import CreateTodo from '../todos/CreateTodo'
 
 const Aside = styled.div `
     position:fixed;
-    top:20%;
+    top:7vh;
     width:fit-content;
+    
     background:lightblue;
+    padding:2.5%;
+    
+    ul{
+        list-style:none;
+        
+    }
+    input{
+        margin:2% auto;
+        border-radius:8px;
+        padding:3%;
+        font-size:1rem;
+        
+
+    }
+    button{
+        background:cornflowerblue;
+        padding:6% 22%;
+        font-size:1rem;
+        margin-left:2%;
+        margin-top:2%;
+        transition:all .4 ease-in-out;
+        color:white;
+
+        &:hover{
+            background:lightseagreen;
+        }
+    }
+    
 
 `
 const initialNewTodo = {
@@ -20,7 +49,7 @@ const initialNewTodo = {
 
 export default function UserAside(props) {
     const [newTodo,setNewTodo]= useState(initialNewTodo)
-    // const {addTodo} = props
+    const {addTodo} = props
 
     const onInputChange = evt=>{
         const name = evt.target.name
@@ -49,19 +78,19 @@ export default function UserAside(props) {
 
     // }
 
-    // const postNewtodo = evt=>{
-    //     // addTodo(newTodo)
+    const postNewtodo = evt=>{
+        addTodo(newTodo)
         
-    //     // setNewTodo(initialNewTodo)
-    // }
+        setNewTodo(initialNewTodo)
+    }
 
    
     
     return (
-        <Aside>
+        <Aside className='aside'>
             <div>
-                <img src='' id='userImg' alt='user img'/>
-                <p>User Name</p>
+                {/* <img src='' id='userImg' alt='user img'/> */}
+                <h2>User Name</h2>
                 
                 <h3>Create a new How to </h3>
                 <ul>
@@ -83,8 +112,8 @@ export default function UserAside(props) {
                    
                 </ul>
             </div>
-            <CreateTodo  setNewTodo={setNewTodo} newTodo={newTodo}/>
-            <button>Create To Do</button>
+            <CreateTodo onInputChange={onInputChange}  setNewTodo={setNewTodo} newTodo={newTodo}/>
+            <button id='createBtn' onClick={postNewtodo}>Create To Do</button>
         </Aside>
     )
 }

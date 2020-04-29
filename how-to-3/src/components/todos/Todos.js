@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
+import { axiosWithAuth } from '../../utilities/axiosWithAuth';
+import Axios from 'axios';
 
 
 const TodoDiv = styled.div `
@@ -21,7 +23,7 @@ const TodoDiv = styled.div `
 
 
 export default function Todos(props) {
-    const {todoInfo,userLoggedIn} = props;
+    const {todoInfo} = props;
     
 
 // const fileType =todoInfo.file[0].type
@@ -29,11 +31,13 @@ export default function Todos(props) {
 const todoSteps = todoInfo.steps
 const steps = Object.values(todoSteps)
 
+axiosWithAuth()
+.get()
 
     return (
         <TodoDiv>
-            <img src={userLoggedIn.image} alt='userImage'/>
-            <h4>{userLoggedIn.username} </h4>
+            {/* <img  alt='userImage'/> */}
+            {/* <h4>{LouserggedIn.username} </h4> */}
             <ul>
                 
             </ul>
@@ -58,7 +62,9 @@ const steps = Object.values(todoSteps)
              show more
              </Link>
 
-            
+            <div>
+                <p>likes: {todoInfo.likes} </p>
+            </div>
         </TodoDiv>
     )
 }

@@ -15,3 +15,6 @@ body{
   width: 80%;
   margin: 0 auto;
 }
+.asideDiv{
+  position:relative
+}
