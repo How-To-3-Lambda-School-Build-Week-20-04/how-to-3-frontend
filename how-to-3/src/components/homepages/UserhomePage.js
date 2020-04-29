@@ -1,19 +1,36 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,} from 'react'
+import {Link,Switch,Route,BrowserRouter,useRouteMatch} from 'react-router-dom'
 import Axios from 'axios'
+import styled from 'styled-components'
 
 import UserAside from '../aside/UserAside'
 import UserNav from '../navs/UserNav'
-
+import Postpage from '../postpage/Postpage'
 import Todos from '../todos/Todos'
+
 
 const url =''
 
+const TodoContainer = styled.div `
+    display:flex;
+    flex-direction:row-reverse;
+    flex-wrap:wrap;
+
+    background:darkgreen(tan,20%);
+    width:90%;
+    margin:0 auto;
+    padding:3%;
+
+`
 
 
 
 export default function UserhomePage(props) {
+    const {userLoggedIn} = props
 
     const [toDos,setToDos] = useState([])
+    const [asideShow,setasideShow] = useState(false)    
+    
     //useEffect for getting the logged in users  to do's andsetting them to{ toDos}
 
     useEffect(()=>{
@@ -29,25 +46,50 @@ export default function UserhomePage(props) {
     },[])
 
     const addTodo = newTodo =>{
-        setToDos([...setToDos,newTodo])
+        setToDos([...toDos,newTodo])
     }
+
+    const showAside = evt=>{
+        setasideShow(!asideShow)
+    }
+
+
     
     return (
         <div>
             <UserNav/>
 
-            <div>
-                <UserAside addTodo={addTodo}/>
+            <main className='container'>
+
+                <div>
+                    {!asideShow ? <button onClick={showAside}>show menu</button> : <UserAside addTodo={addTodo}/>}
+                    
+                    {asideShow ? <button onClick={showAside}>hide menu</button>:null}
+                </div>
                 
-            </div>
-
-            <div>
-                {toDos.map(todo=>{
-                return    <Todos todoInfo={todo}/>
-                })}
-            </div>
-            
-
+                <div>
+                   
+                            
+                                <TodoContainer onMouseEnter={evt=>{setasideShow(false)}}>
+                                    {toDos.map(todo=>{
+                                    return (  
+                                    
+                                         
+                                             <Todos todoInfo={todo} userLoggedIn={userLoggedIn}/>
+                                         
+                                    )
+                                    })}
+                                </TodoContainer>
+                            
+                        
+                            
+                        
+               
+                    
+                </div>
+                
+                
+            </main>
             
         </div>
     )
