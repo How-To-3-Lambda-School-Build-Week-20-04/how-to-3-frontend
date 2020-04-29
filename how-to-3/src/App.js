@@ -1,25 +1,41 @@
 import React,{useState} from 'react';
-import {BrowserRouter as Router,Route,Switch,Link,useRouteMatch, Redirect } from 'react-router-dom'
 
-import * as yup from 'yup';
-import axios from 'axios';
-import styled from 'styled-components';
+import {BrowserRouter as Router,Route,Switch,Link } from 'react-router-dom'
+import * as yup from 'yup'
+import axios from 'axios'
+import styled from 'styled-components'
+import Login from './components/Login';
+import PrivateRoute from './utilities/PrivateRoute';
+import './App.css';
 
 //Component Imports
-import Login from './components/forms/Login';
-import Signup from './components/forms/Signup';
+
 import UserhomePage from './components/homepages/UserhomePage';
 import Landing from './components/homepages/Landing';
 import Postpage from './components/postpage/Postpage';
 
+function App() {
+    //Yup validatiaon requirements
+const loginFormscheme = yup.object().shape({
+  email: yup
+  .string()
+  .email('must be a valid email ')
+  .required('valid email required'),
+  
+  password: yup
+    .string()
+    .required()
+  
+})
 
-//Css Import
-import './App.css';
+//   return (
+//     <Router>
+//       <div className="App-header">
+//         <Route exact path="/" component={Login} />
+//           <PrivateRoute exact path="/howtopage" component={HowToPage} />
 
 
-//database url
-const url = 'https://how-to-application.herokuapp.com/'
-const postNewUser= url+'/api/auth/register'
+
 
 
 
