@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {BrowserRouter as Router,Route,Switch,Link } from 'react-router-dom'
+import {BrowserRouter as Router,Route,Switch,Link,useRouteMatch } from 'react-router-dom'
 import * as yup from 'yup'
 import axios from 'axios'
 import styled from 'styled-components'
@@ -9,6 +9,7 @@ import Login from './components/forms/Login'
 import Signup from './components/forms/Signup'
 import UserhomePage from './components/homepages/UserhomePage';
 import Landing from './components/homepages/Landing'
+import Postpage from './components/postpage/Postpage'
 
 
 //Css Import
@@ -20,13 +21,7 @@ const url = 'https://how-to-application.herokuapp.com/'
 const postNewUser= url+'/api/auth/register'
 
 
-//Yup validatiaon requirements
-const formSchema = yup.object().shape({
-  username:yup
-  .string()
-  .required('Create a new user name ')
 
-})
 
 const initialSignup = {
   username:'',
@@ -79,6 +74,19 @@ function App() {
 
   }
 
+  //Yup validatiaon requirements
+const loginFormscheme = yup.object().shape({
+  email: yup
+  .string()
+  .email('must be a valid email ')
+  .required('valid email required')
+  .min(5),
+  password: yup
+  .string()
+  .required('please enter password')
+  
+})
+
 
   return (
     <Router>
@@ -88,6 +96,11 @@ function App() {
 
 
         <Switch>
+
+        <Route path = { `/post/:posttitle`}>
+                            
+           <Postpage/>
+         </Route>
 
           <Route path='/:user/homepage' >
             <UserhomePage

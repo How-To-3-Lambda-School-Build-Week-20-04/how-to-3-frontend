@@ -1,16 +1,21 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,} from 'react'
+import {Link,Switch,Route,BrowserRouter,useRouteMatch} from 'react-router-dom'
 import Axios from 'axios'
+import styled from 'styled-components'
 
 import UserAside from '../aside/UserAside'
 import UserNav from '../navs/UserNav'
-
+import Postpage from '../postpage/Postpage'
 import Todos from '../todos/Todos'
-import styled from 'styled-components'
+
 
 const url =''
 
 const TodoContainer = styled.div `
     display:flex;
+    flex-direction:row-reverse;
+    flex-wrap:wrap;
+
     background:lightblue;
     width:80%;
     margin:0 auto;
@@ -47,6 +52,8 @@ export default function UserhomePage(props) {
     const showAside = evt=>{
         setasideShow(!asideShow)
     }
+
+    const match = useRouteMatch()
     
     return (
         <div>
@@ -60,12 +67,26 @@ export default function UserhomePage(props) {
                     {asideShow ? <button onClick={showAside}>hide menu</button>:null}
                 </div>
                 
-                <TodoContainer>
-                    {toDos.map(todo=>{
-                    return    <Todos todoInfo={todo} userLoggedIn={userLoggedIn}/>
-                    })}
+                <div>
+                   
+                            
+                                <TodoContainer onMouseEnter={evt=>{setasideShow(false)}}>
+                                    {toDos.map(todo=>{
+                                    return (  
+                                    
+                                         
+                                             <Todos todoInfo={todo} userLoggedIn={userLoggedIn}/>
+                                         
+                                    )
+                                    })}
+                                </TodoContainer>
+                            
+                        
+                            
+                        
+               
                     
-                </TodoContainer>
+                </div>
                 
                 
             </main>

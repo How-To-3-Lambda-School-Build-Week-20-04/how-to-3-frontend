@@ -13,6 +13,7 @@ const initialNewTodo = {
     title:'',
     subtitle:'',
     description:'',
+    steps:{},
     file: {}
 
 }
@@ -29,6 +30,16 @@ export default function UserAside(props) {
         })
     }
 
+    const onstepsInputChange = evt=>{
+        const name = evt.target.name
+        const value = evt.target.value
+        setNewTodo({...newTodo,
+            steps:{...newTodo.steps,
+                [name]:value
+            }
+        })
+    }
+
     const onFileChange = evt=>{
         const name = evt.target.name
         const value = evt.target.files
@@ -40,6 +51,7 @@ export default function UserAside(props) {
 
     const postNewtodo = evt=>{
         addTodo(newTodo)
+        
         setNewTodo(initialNewTodo)
     }
 
@@ -71,7 +83,7 @@ export default function UserAside(props) {
                    
                 </ul>
             </div>
-            <CreateTodo onInputChange={onInputChange} onFileChange={onFileChange} newTodo={newTodo}/>
+            <CreateTodo onInputChange={onInputChange} onstepsInputChange={onstepsInputChange} onFileChange={onFileChange} setNewTodo={setNewTodo} newTodo={newTodo}/>
             <button onClick={postNewtodo}>Create To Do</button>
         </Aside>
     )
