@@ -4,7 +4,7 @@ import UserAside from '../aside/UserAside'
 
 export default function Postpage(props) {
     return (
-        <div>
+        <div className='container'>
             <UserAside/>
         </div>
     )

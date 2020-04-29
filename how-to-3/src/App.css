@@ -6,3 +6,12 @@
 
 }
 
+body{
+  background-color: cornflowerblue;
+}
+
+.container{
+  background-color: tan;
+  width: 80%;
+  margin: 0 auto;
+}

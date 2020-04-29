@@ -10,6 +10,9 @@ const TodoDiv = styled.div `
     background:black;
     color:white;
     padding:10%;
+    border-radius:5px;
+    box-shadow:0 0 10% ;
+
     .source{
         width:80%;
         margin:0 auto;
@@ -20,12 +23,7 @@ const TodoDiv = styled.div `
 export default function Todos(props) {
     const {todoInfo,userLoggedIn} = props;
     
-    
-const getDate = new Date()
-    let hours = ''
-if(getDate.getHours()> 12){
-    hours = (getDate.getHours() ) - 12
-}
+
 // const fileType =todoInfo.file[0].type
 
 const todoSteps = todoInfo.steps
@@ -40,14 +38,14 @@ const steps = Object.values(todoSteps)
                 
             </ul>
             <h2>{todoInfo.title}</h2>
-            <p>{hours} : {getDate.getMinutes()} </p>
+           
             <h4>{todoInfo.subtitle} </h4>
             <p>{todoInfo.description} </p>
-            {/* <ol>
+            <ol>
                 {steps.map(step=>{
                   return  <li>{ step}</li>
                 })}
-            </ol> */}
+            </ol>
             
             {/* {fileType.slice(0,5)==='video' ?
              <video className='source'  controls>

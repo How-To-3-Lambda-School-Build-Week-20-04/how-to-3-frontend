@@ -16,8 +16,8 @@ const TodoContainer = styled.div `
     flex-direction:row-reverse;
     flex-wrap:wrap;
 
-    background:lightblue;
-    width:80%;
+    background:darkgreen(tan,20%);
+    width:90%;
     margin:0 auto;
     padding:3%;
 
@@ -59,7 +59,7 @@ export default function UserhomePage(props) {
         <div>
             <UserNav/>
 
-            <main>
+            <main className='container'>
 
                 <div>
                     {!asideShow ? <button onClick={showAside}>show menu</button> : <UserAside addTodo={addTodo}/>}

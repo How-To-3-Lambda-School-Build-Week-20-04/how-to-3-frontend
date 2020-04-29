@@ -12,6 +12,9 @@ export default function Login(props) {
     return (
         <div>
             <LandingNav/>
+            
+
+            <div className='container'>
             <div className='input-box'>
                 <label htmlFor='Email'>
                     Email 
@@ -19,16 +22,17 @@ export default function Login(props) {
                 <p> {loginErrors.email} </p>
                 <input name='email' type='email' value={loginData.email} placeholder='Email'onChange={onLoginChange}></input>
             </div>
-
-            <div className='input-box'>
-                <label htmlFor='password'>
-                    Password
-                </label>
-                <p>{loginErrors.password} </p>
-                <input name='password' type='password' value={loginData.password} placeholder='Password'onChange={onLoginChange}></input>
-            </div>
             
-            <button onClick={onLoginClick}>Login</button>
+                <div className='input-box'>
+                    <label htmlFor='password'>
+                        Password
+                    </label>
+                    <p>{loginErrors.password} </p>
+                    <input name='password' type='password' value={loginData.password} placeholder='Password'onChange={onLoginChange}></input>
+                </div>
+                
+                <button onClick={onLoginClick}>Login</button>
+            </div>
         </div>
     )
 }
