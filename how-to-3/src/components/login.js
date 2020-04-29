@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { axiosWithAuth } from "../utilities/axiosWithAuth";
+import Register from './Register';
 
 const Login = props => {
   const [credentials, setCredentials] = useState({
@@ -47,7 +48,7 @@ const Login = props => {
             onChange={handleChange}
           />
           <br/>
-          <p href="/registerpage">Register Here</p>
+          <button exact path="/register" component={Register}>Register Here</button>
           <button>Log in</button>
         </form>
       </div>
