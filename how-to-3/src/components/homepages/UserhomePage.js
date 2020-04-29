@@ -45,9 +45,9 @@ export default function UserhomePage(props) {
         })
     },[])
 
-    const addTodo = newTodo =>{
-        setToDos([...toDos,newTodo])
-    }
+    // const addTodo = newTodo =>{
+    //     setToDos([...toDos,newTodo])
+    // }
 
     const showAside = evt=>{
         setasideShow(!asideShow)
@@ -62,7 +62,7 @@ export default function UserhomePage(props) {
             <main className='container'>
 
                 <div>
-                    {!asideShow ? <button onClick={showAside}>show menu</button> : <UserAside addTodo={addTodo}/>}
+                    {!asideShow ? <button onClick={showAside}>show menu</button> : <UserAside />}
                     
                     {asideShow ? <button onClick={showAside}>hide menu</button>:null}
                 </div>

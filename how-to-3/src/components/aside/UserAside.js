@@ -20,7 +20,7 @@ const initialNewTodo = {
 
 export default function UserAside(props) {
     const [newTodo,setNewTodo]= useState(initialNewTodo)
-    const {addTodo} = props
+    // const {addTodo} = props
 
     const onInputChange = evt=>{
         const name = evt.target.name
@@ -40,20 +40,20 @@ export default function UserAside(props) {
         })
     }
 
-    const onFileChange = evt=>{
-        const name = evt.target.name
-        const value = evt.target.files
-        setNewTodo({...newTodo,
-            [name]:value
-        })
+    // const onFileChange = evt=>{
+    //     const name = evt.target.name
+    //     const value = evt.target.files
+    //     setNewTodo({...newTodo,
+    //         [name]:value
+    //     })
 
-    }
+    // }
 
-    const postNewtodo = evt=>{
-        addTodo(newTodo)
+    // const postNewtodo = evt=>{
+    //     // addTodo(newTodo)
         
-        setNewTodo(initialNewTodo)
-    }
+    //     // setNewTodo(initialNewTodo)
+    // }
 
    
     
@@ -83,8 +83,8 @@ export default function UserAside(props) {
                    
                 </ul>
             </div>
-            <CreateTodo onInputChange={onInputChange} onstepsInputChange={onstepsInputChange} onFileChange={onFileChange} setNewTodo={setNewTodo} newTodo={newTodo}/>
-            <button onClick={postNewtodo}>Create To Do</button>
+            <CreateTodo  setNewTodo={setNewTodo} newTodo={newTodo}/>
+            <button>Create To Do</button>
         </Aside>
     )
 }
