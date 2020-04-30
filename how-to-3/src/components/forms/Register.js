@@ -7,19 +7,8 @@ import LandingNav from "../navs/LandingNav";
 
 
 const Register = props => {
-  const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
-    email: ""
-  })
 
-  const handleChange = e => {
-    setCredentials({
-      ...credentials,
-      [e.target.name]: e.target.value
-    })
-    console.log('handleChange results: ', credentials)
-  }
+const {handleChange,credentials,loginErrors} = props
   
   const handleSubmit = e => {
     e.preventDefault();
@@ -35,6 +24,7 @@ const Register = props => {
     text-align:center
   `
   const LoginDiv = styled.div`
+  
   
   width:80%;
   margin:0 auto;
@@ -83,6 +73,14 @@ const Register = props => {
 
   }
   `
+  
+  const Errors = styled.p`
+    color:red;
+    font-size:.8rem;
+    background: rgb(210,209,235);
+background: linear-gradient(90deg, rgba(210,209,235,1) 0%, rgba(255,171,147,0.6152836134453781) 43%, rgba(255,255,255,1) 100%);
+  `
+
   return (
     <>
     <LandingNav/>
@@ -92,6 +90,7 @@ const Register = props => {
           <form onSubmit={handleSubmit}>
           <h2>Signup Today</h2>
             <div>  
+            <Errors> {loginErrors.username} </Errors> 
               <input 
                 type='text'
                 name='username'
@@ -100,6 +99,7 @@ const Register = props => {
                 onChange={handleChange}
               />
               <br/>
+              <Errors>{loginErrors.password} </Errors>
               <input 
                 type='password'
                 name='password'
@@ -108,6 +108,7 @@ const Register = props => {
                 onChange={handleChange}
               />
               <br/>
+              <Errors>{loginErrors.email} </Errors>
               <input 
                 type='email'
                 name='email'

@@ -1,22 +1,47 @@
 import React, {useState} from "react";
 import { axiosWithAuth } from "../../utilities/axiosWithAuth";
+import * as yup from 'yup'
 import styled from 'styled-components'
 import Register from './Register';
 import LandingNav from '../navs/LandingNav'
 
 const Login = props => {
+  const {loginErrors, setLoginErrors} = props
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
     email: ""
   })
-
+  
+  const loginFormscheme= yup.object().shape({
+    username:yup
+    .string()
+    .required('username Required')
+    ,
+    password:yup
+    .string()
+    .required()
+  })
   const handleChange = e => {
+    const name = e.target.name
+    const value = e.target.value
+    yup
+    .reach(loginFormscheme,name)
+    .validate(value)
+    .then(valid=>{
+      setLoginErrors({...loginErrors,[name]:''})
+      
+    })
+    .catch(err=>{
+      setLoginErrors({...loginErrors,[name] :err.errors[0]})
+    })
+
+    
+    console.log('handleChange results: ', credentials)
     setCredentials({
       ...credentials,
-      [e.target.name]: e.target.value
+      [name]: value
     })
-    console.log('handleChange results: ', credentials)
   }
   
   const handleSubmit = e => {
@@ -31,6 +56,12 @@ const Login = props => {
   }
   const Title = styled.h1 `
     text-align:center
+  `
+  const Errors= styled.p `
+    color:red;
+    font-size:.8rem;
+    background: rgb(210,209,235);
+background: linear-gradient(90deg, rgba(210,209,235,1) 0%, rgba(255,171,147,0.6152836134453781) 43%, rgba(255,255,255,1) 100%);
   `
   const LoginDiv = styled.div `
   
@@ -88,11 +119,12 @@ const Login = props => {
         
         <Title>How To App</Title>
         <LoginDiv>
-          
+    
         <div>
           <form onSubmit={handleSubmit}>
               <h2>Login</h2> 
             <div> 
+            <Errors>{loginErrors.username}</Errors>
             <input 
               type='text'
               name='username'
@@ -101,6 +133,7 @@ const Login = props => {
               onChange={handleChange}
             />
             <br/>
+            <Errors>{loginErrors.password} </Errors>
             <input 
               type='password'
               name='password'

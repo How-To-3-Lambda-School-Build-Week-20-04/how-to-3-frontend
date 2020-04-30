@@ -15,9 +15,42 @@ const LandingDiv = styled.div `
         
         .innerBox{
             height:13rem;
-            background:red;
+            background:darkred;
             width:40%;
             margin:2%;
+            color:lightblue;
+            h4{
+                font-size:1.7rem;
+                margin-top:25%;
+            }
+            
+
+            
+        }
+        #box1{
+
+            background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://www.jotform.com/blog/wp-content/uploads/2018/07/photos-with-story-featured-15.jpg');
+
+            transition: all .8s ease-in-out;
+         
+            
+            /* background-size:; */
+            background-position:center;
+        }
+        #box2{
+            background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://insights.dice.com/wp-content/uploads/2019/07/Tell-Me-About-Yourself-Interview-Job-Interview-Interview-Questions-Dice.png');
+
+           
+            background-size:contain;
+
+            
+        }
+        #box3{
+            width:100%;
+            h4{
+                font-size:1.7rem;
+                margin-top:5%;
+            }
         }
     }
     @media screen and (max-width:800px){
@@ -44,23 +77,33 @@ export default function Landing() {
                     <h1>How - To - 3</h1>
 
                     <div className='innerContainer'>
-                        <div className='innerBox'>
-                            <h4>hello</h4>
+                        <div className='innerBox' id='box2'>
+                            <h4>Create The Event</h4>
+                            <p className='pg-info'>
+                                lorem tect
+                            </p>
 
                         </div>
 
-                        <div className='innerBox'>
+                        <div className='innerBox' id='box1' >
+                            <h4>Tell us Something About it </h4>
+                            <p className='pg-info'>
+                                lorem tect
+                            </p>
 
                         </div>
 
-                        <div className='innerBox'>
-                            <h4>hello</h4>
+                        <div className='innerBox' id='box3'>
+                            <h4>Post It </h4>
+                            <p className='pg-info'>
+                                lorem tect
+                            </p>
 
                         </div>
 
-                        <div className='innerBox'>
 
-                        </div>
+
+                        
 
 
 

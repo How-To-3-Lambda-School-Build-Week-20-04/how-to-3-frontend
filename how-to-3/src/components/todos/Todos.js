@@ -7,7 +7,9 @@ import Axios from 'axios';
 
 const TodoDiv = styled.div `
 
-    
+
+    display:flex;
+    flex-direction:column;
     margin: 2% auto;
     background:black;
     color:white;
@@ -24,10 +26,22 @@ const TodoDiv = styled.div `
         width:80%;
         margin:0 auto;
     };
+    img{
+        position:relative;
+        width:20%;
+        height:5%;
+        float:left;
+        margin-left:60%;
+        align-content:flex-start;
+    }
 
     @media screen and (max-width:800px){
         width:100%;
     }
+`
+const Close = styled.button `
+
+
 `
 
 
@@ -44,8 +58,11 @@ axiosWithAuth()
 .get()
 
     return (
+         
+       
         <TodoDiv>
-            {/* <img  alt='userImage'/> */}
+                
+           
             {/* <h4>{LouserggedIn.username} </h4> */}
             <ul>
                 
@@ -74,6 +91,10 @@ axiosWithAuth()
             <div>
                 <p>likes: {todoInfo.likes} </p>
             </div>
+
+            <Close>Delete</Close>
+           
         </TodoDiv>
+        
     )
 }

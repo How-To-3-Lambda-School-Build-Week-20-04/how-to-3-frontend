@@ -4,7 +4,7 @@ import {BrowserRouter as Router,Route,Switch,Link } from 'react-router-dom'
 import * as yup from 'yup'
 import axios from 'axios'
 import styled from 'styled-components'
-import login from './components/forms/login';
+import Login from './components/forms/Login';
 import PrivateRoute from './utilities/PrivateRoute';
 import './App.css';
 
@@ -29,25 +29,73 @@ import Register from './components/forms/Register';
 
 
 
-const initialSignup = {
-  username:'',
-  email:'',
-  password:'',
+// const initialSignup = {
+//   username:'',
+//   email:'',
+//   password:'',
 
-}
+// }
 
-const initialLogin = {
-  username:'',
-  password:'',
-}
+// const initialLogin = {
+//   username:'',
+//   password:'',
+// }
 
 function App() {
   // const [signupData,setSignupData] =useState(initialSignup)
   // const [loginData,setLoginData] = useState(initialLogin)
   const [loginErrors,setLoginErrors] = useState({
-    email:'',
+    username:'',
     password:''
   })
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+    email: ""
+  })
+  const initialSignUp = {
+    username: "",
+    password: "",
+    email: ""
+  }
+
+  const signUpScheme = yup.object().shape({
+    username:yup
+    .string()
+    .required('valid username ')
+    .min(5,'username must be atleast 5 characters')
+    ,
+    password:yup
+    .string()
+    .required('A password is requred')
+    .min(8,'password must be atleast 8 characters'),
+    email:yup
+    .string()
+    .email('Valid email Required')
+  })
+  const handleChange = e => {
+  
+    const name = e.target.name
+    const value = e.target.value
+    yup
+    .reach(signUpScheme,name)
+    .validate(value)
+    .then(valid=>{
+      setLoginErrors({...loginErrors,[name]:''})
+      })
+    .catch(err=>{
+      setLoginErrors({...loginErrors,[name] :err.errors[0]})
+    })
+
+  
+  
+    setCredentials({
+      ...credentials,
+      [name]: value})
+    
+    // console.log('handleChange results: ', credentials)
+    
+  }
   // const [userLoggedIn,setUserLoggedIn] = useState({})
   // const [isUserLoggedIn,setIsUserLoggedIn]= useState(false)
 
@@ -112,20 +160,6 @@ function App() {
 
   // }
 
-  //Yup validatiaon requirements
-const loginFormscheme = yup.object().shape({
-  email: yup
-  .string()
-  .email('must be a valid email ')
-  .required('valid email required'),
-  
-  password: yup
-  
-    .string()
-    .required()
-  
-})
-
 
   return (
     <Router>
@@ -135,6 +169,9 @@ const loginFormscheme = yup.object().shape({
 
 
         <Switch>
+          <Route path='/post/:id'>
+            <Postpage/>
+          </Route>
 
         
 
@@ -145,11 +182,23 @@ const loginFormscheme = yup.object().shape({
             />
           </Route>
           
-          <Route path='/register'component={Register}/> 
+          <Route path='/register'>
+            <Register
+              loginErrors={loginErrors}
+              handleChange= {handleChange}
+              credentials= {credentials}
+            />
+          </Route> 
             
           
           
-          <Route path='/login'component={login}/>
+          <Route path='/login'>
+            <Login
+              loginErrors={loginErrors}
+              setLoginErrors={setLoginErrors}
+            
+            />
+          </Route>
             
         
 
