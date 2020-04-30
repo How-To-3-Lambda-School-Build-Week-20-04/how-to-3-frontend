@@ -3,12 +3,13 @@ import styled from 'styled-components'
 import CreateTodo from '../todos/CreateTodo'
 
 const Aside = styled.div `
-    position:absolute;
-    top:7vh;
+    position:fixed;
+    top:12vh;
     width:fit-content;
     
     background:lightblue;
     padding:2.5%;
+    border-radius:5px;
     
     ul{
         list-style:none;
@@ -24,9 +25,9 @@ const Aside = styled.div `
     }
     button{
         background:cornflowerblue;
-        padding:6% 22%;
+        padding:8% 25%;
         font-size:1rem;
-        margin-left:2%;
+        margin-left:4%;
         margin-top:2%;
         transition:all .4 ease-in-out;
         color:white;
