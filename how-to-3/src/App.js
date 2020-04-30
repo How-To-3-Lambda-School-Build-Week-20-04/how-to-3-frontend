@@ -136,10 +136,7 @@ const loginFormscheme = yup.object().shape({
 
         <Switch>
 
-        <Route path = { `/post/:posttitle`}>
-                            
-           <Postpage/>
-         </Route>
+        
 
           <Route path='/:user/homepage' >
             <UserhomePage
