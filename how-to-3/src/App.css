@@ -14,7 +14,14 @@ body{
   background-color: tan;
   width: 80%;
   margin: 0 auto;
+  height:100%;
+
 }
 .asideDiv{
   position:relative
+}
+
+form{
+  margin:0 auto;
+  widows: 90%;
 }

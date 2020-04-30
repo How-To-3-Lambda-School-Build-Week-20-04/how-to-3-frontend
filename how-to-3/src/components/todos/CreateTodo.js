@@ -5,6 +5,7 @@ const CreateDiv = styled.div `
     display:flex;
     flex-direction:column;
     text-align:center;
+    
     input,textarea{
         text-align:center;
         background:lightblue;
@@ -25,7 +26,7 @@ const CreateDiv = styled.div `
     button{
         padding:3%;
         background:cornflowerblue;
-        margin:3% 0;
+        margin:1% 0;
         color:white;
         text-shadow:0 2px 4px whtie;
         font-size:1rem;
@@ -53,15 +54,15 @@ export default function CreateTodo(props) {
         
     }
 
-    for(let i = 0; i < steps ;i++ ){
-           stepList.push(<label>
-                <h5>step{i+1}</h5>
-               <input type='text' name={`step${i + 1}`} value ={newTodo.steps[`step$(i)`]} onChange={onstepsInputChange} placeholder={ `Step ${i + 1}`} />
-               {/* <button name={`step${i + 1}`} onClick={subStep}>Delete Step</button> */}
+    // for(let i = 0; i < steps ;i++ ){
+    //        stepList.push(<label>
+    //             <h5>step{i+1}</h5>
+    //            <input type='text' name={`step${i + 1}`} value ={newTodo.steps[`step$(i)`]} onChange={onstepsInputChange} placeholder={ `Step ${i + 1}`} />
+    //            {/* <button name={`step${i + 1}`} onClick={subStep}>Delete Step</button> */}
 
-           </label>
-             )
-    }
+    //        </label>
+    //          )
+    // }
 
    
 
@@ -75,7 +76,7 @@ export default function CreateTodo(props) {
             <input type='text' name='subtitle'  value={newTodo.subtitle} placeholder='Subtitle' onChange={onInputChange}/>
             {stepList}
             
-            <button onClick={addStep}>Add steps</button>
+            {/* <button onClick={addStep}>Add steps</button> */}
             <textarea type='text' name='description'  value={newTodo.description} placeholder='Description' onChange={onInputChange}/>
             {/* <input type='file' name= 'file' value={newTodo.files}   onChange={onFileChange}/> */}
             

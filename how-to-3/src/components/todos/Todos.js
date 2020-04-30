@@ -14,10 +14,19 @@ const TodoDiv = styled.div `
     padding:10%;
     border-radius:5px;
     box-shadow:0 0 10% ;
+    transition: all .8s ease;
+    text-align:center;
+    &:hover{
+        background:lightblue;
+    }
 
     .source{
         width:80%;
         margin:0 auto;
+    };
+
+    @media screen and (max-width:800px){
+        width:100%;
     }
 `
 

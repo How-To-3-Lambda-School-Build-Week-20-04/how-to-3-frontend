@@ -32,7 +32,11 @@ const Button = styled.button `
     box-shadow:-3px -2px .3rem black;
     font-size:1rem;
 
-    
+    @media screen and (max-width:800px) {
+        background:lightblue;
+        
+        
+    }
 
 
 `
@@ -54,7 +58,7 @@ export default function UserhomePage(props) {
     
         })
         .catch((err)=>{
-            alert('An error happened while loading To Do')
+            // alert('An error happened while loading To Do')
     
         })
     },[])
