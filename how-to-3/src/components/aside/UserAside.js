@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import CreateTodo from '../todos/CreateTodo'
 
 const Aside = styled.div `
-    position:fixed;
+    position:absolute;
     top:7vh;
     width:fit-content;
     

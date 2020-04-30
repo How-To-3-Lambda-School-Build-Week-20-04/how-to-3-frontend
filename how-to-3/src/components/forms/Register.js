@@ -4,6 +4,7 @@ import { axiosWithAuth } from "../../utilities/axiosWithAuth";
 import LandinigNav from '../navs/LandingNav'
 import LandingNav from "../navs/LandingNav";
 
+
 const Register = props => {
   const [credentials, setCredentials] = useState({
     username: "",

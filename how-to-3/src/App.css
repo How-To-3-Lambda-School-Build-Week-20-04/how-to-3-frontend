@@ -18,3 +18,8 @@ body{
 .asideDiv{
   position:relative
 }
+
+form{
+  margin:0 auto;
+  widows: 90%;
+}

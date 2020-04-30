@@ -25,7 +25,7 @@ const CreateDiv = styled.div `
     button{
         padding:3%;
         background:cornflowerblue;
-        margin:3% 0;
+        margin:1% 0;
         color:white;
         text-shadow:0 2px 4px whtie;
         font-size:1rem;
