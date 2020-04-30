@@ -89,16 +89,16 @@ export default function UserhomePage(props) {
                         <div>
                            
                                     
-                                        <TodoContainer >
-                                            {toDos.map(todo=>{
-                                            return (  
+                             <TodoContainer >
+                             {toDos.map(todo=>{
+                                return (  
                                             
                                                  
-                                                     <Todos todoInfo={todo} userLoggedIn={userLoggedIn}/>
+                                <Todos todoInfo={todo} userLoggedIn={userLoggedIn}/>
                                                  
-                                            )
-                                            })}
-                                        </TodoContainer>
+                                )
+                                })}
+                                </TodoContainer>
                                     
                                 
                                     
