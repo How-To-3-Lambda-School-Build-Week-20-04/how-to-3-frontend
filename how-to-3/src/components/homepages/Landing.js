@@ -5,7 +5,8 @@ import LandingNav from '../navs/LandingNav'
 const LandingDiv = styled.div `
    
     background: lightblue;
-    width:75%;
+    width:89%;
+     height:95vh;
     margin:0 auto;
     text-align:center;
     .innerContainer{
@@ -46,11 +47,16 @@ const LandingDiv = styled.div `
             
         }
         #box3{
-            width:100%;
+            width:90%;
             h4{
                 font-size:1.7rem;
                 margin-top:5%;
             }
+        }
+        section{
+            width:100%;
+            height:95vh;
+            background:antiquewhite;
         }
     }
     @media screen and (max-width:800px){
@@ -100,6 +106,10 @@ export default function Landing() {
                             </p>
 
                         </div>
+                        <section>
+                            <h3>About us</h3>
+
+                        </section>
 
 
 

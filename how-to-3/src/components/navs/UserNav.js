@@ -7,6 +7,10 @@ background:black;
 width:80%;
 margin:0 auto;
 padding:1%;
+div{
+  display:flex;
+  justify-content:space-between;
+}
 .nav-item{
   text-decoration:none;
   color:white;
@@ -14,16 +18,19 @@ padding:1%;
 `
 
 export default function UserNav(props) {
+  const {back} = props
     return (
         <Nav>
           <div>
 
-          <span> 
-            <Link className='nav-item' to='/'>Log Out</Link> 
-            
           
-          </span>
+            <Link className='nav-item' to='/'>Log Out</Link> 
+           
+          
+          
+         
           </div>
+          
           
         </Nav>
     )

@@ -18,8 +18,15 @@ const TodoDiv = styled.div `
     box-shadow:0 0 10% ;
     transition: all .8s ease;
     text-align:center;
+    #link{
+        text-decoration:none;
+        color:white;
+        background:cornflowerblue;
+        
+
+    }
     &:hover{
-        background:lightblue;
+        background:lightslategray;
     }
 
     .source{
@@ -40,13 +47,13 @@ const TodoDiv = styled.div `
     }
 `
 const Close = styled.button `
-
+    
 
 `
 
 
 export default function Todos(props) {
-    const {todoInfo} = props;
+    const {todoInfo,setpost} = props;
     
 
 // const fileType =todoInfo.file[0].type
@@ -54,8 +61,7 @@ export default function Todos(props) {
 const todoSteps = todoInfo.steps
 const steps = Object.values(todoSteps)
 
-axiosWithAuth()
-.get()
+
 
     return (
          
@@ -70,7 +76,7 @@ axiosWithAuth()
             <h2>{todoInfo.title}</h2>
            
             <h4>{todoInfo.subtitle} </h4>
-            <p>{todoInfo.description} </p>
+            {/* <p>{todoInfo.description} </p> */}
             <ol>
                 {steps.map(step=>{
                   return  <li>{ step}</li>
@@ -84,7 +90,7 @@ axiosWithAuth()
              
              : <img className='source'  src={URL.createObjectURL(todoInfo.file[0])}/>} */}
 
-             <Link to={ `/post/${todoInfo.title}`}>
+             <Link onClick={setpost} name={todoInfo.title} id='link' to={ `/post/${todoInfo.title}`}>
              show more
              </Link>
 
