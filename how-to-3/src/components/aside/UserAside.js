@@ -50,7 +50,7 @@ const initialNewTodo = {
 
 export default function UserAside(props) {
     const [newTodo,setNewTodo]= useState(initialNewTodo)
-    const {addTodo} = props
+    const {addTodo,userLoggedIn} = props
 
     const onInputChange = evt=>{
         const name = evt.target.name
@@ -91,7 +91,7 @@ export default function UserAside(props) {
         <Aside className='aside'>
             <div>
                 {/* <img src='' id='userImg' alt='user img'/> */}
-                <h2>User Name</h2>
+                <h2> {userLoggedIn.username} </h2>
                 
                 <h3>Create a new How to </h3>
                 <ul>

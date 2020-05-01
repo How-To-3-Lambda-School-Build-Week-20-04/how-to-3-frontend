@@ -11,10 +11,10 @@ body{
 }
 
 .container{
-  background-color: tan;
+  /* background-color: whitesmoke; */
   width: 80%;
   margin: 0 auto;
-  height:100%;
+  
 
 }
 .asideDiv{

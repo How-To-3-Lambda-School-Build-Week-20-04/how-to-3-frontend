@@ -7,7 +7,9 @@ import Axios from 'axios';
 
 const TodoDiv = styled.div `
 
-    
+
+    display:flex;
+    flex-direction:column;
     margin: 2% auto;
     background:black;
     color:white;
@@ -16,23 +18,42 @@ const TodoDiv = styled.div `
     box-shadow:0 0 10% ;
     transition: all .8s ease;
     text-align:center;
+    #link{
+        text-decoration:none;
+        color:white;
+        background:cornflowerblue;
+        
+
+    }
     &:hover{
-        background:lightblue;
+        background:lightslategray;
     }
 
     .source{
         width:80%;
         margin:0 auto;
     };
+    img{
+        position:relative;
+        width:20%;
+        height:5%;
+        float:left;
+        margin-left:60%;
+        align-content:flex-start;
+    }
 
     @media screen and (max-width:800px){
         width:100%;
     }
 `
+const Close = styled.button `
+    
+
+`
 
 
 export default function Todos(props) {
-    const {todoInfo} = props;
+    const {todoInfo,setpost} = props;
     
 
 // const fileType =todoInfo.file[0].type
@@ -40,12 +61,14 @@ export default function Todos(props) {
 const todoSteps = todoInfo.steps
 const steps = Object.values(todoSteps)
 
-axiosWithAuth()
-.get()
+
 
     return (
+         
+       
         <TodoDiv>
-            {/* <img  alt='userImage'/> */}
+                
+           
             {/* <h4>{LouserggedIn.username} </h4> */}
             <ul>
                 
@@ -53,7 +76,7 @@ axiosWithAuth()
             <h2>{todoInfo.title}</h2>
            
             <h4>{todoInfo.subtitle} </h4>
-            <p>{todoInfo.description} </p>
+            {/* <p>{todoInfo.description} </p> */}
             <ol>
                 {steps.map(step=>{
                   return  <li>{ step}</li>
@@ -67,13 +90,17 @@ axiosWithAuth()
              
              : <img className='source'  src={URL.createObjectURL(todoInfo.file[0])}/>} */}
 
-             <Link to={ `/post/${todoInfo.title}`}>
+             <Link onClick={setpost} name={todoInfo.title} id='link' to={ `/post/${todoInfo.title}`}>
              show more
              </Link>
 
             <div>
                 <p>likes: {todoInfo.likes} </p>
             </div>
+
+            <Close>Delete</Close>
+           
         </TodoDiv>
+        
     )
 }

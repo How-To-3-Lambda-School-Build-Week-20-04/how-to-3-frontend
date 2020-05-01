@@ -1,6 +1,6 @@
 import React,{useEffect,useState,} from 'react'
 import {Link,Switch,Route,BrowserRouter,useRouteMatch} from 'react-router-dom'
-import Axios from 'axios'
+import axios from 'axios'
 import styled from 'styled-components'
 import gsap from "gsap"
 
@@ -8,6 +8,7 @@ import UserAside from '../aside/UserAside'
 import UserNav from '../navs/UserNav'
 import Postpage from '../postpage/Postpage'
 import Todos from '../todos/Todos'
+import { axiosWithAuth } from '../../utilities/axiosWithAuth'
 
 
 const url =''
@@ -44,15 +45,13 @@ const Button = styled.button `
 
 
 export default function UserhomePage(props) {
-    const {userLoggedIn} = props
+    const {userLoggedIn,toDos,setToDos,asideShow,setasideShow,setpost} = props
 
-    const [toDos,setToDos] = useState([])
-    const [asideShow,setasideShow] = useState(false)    
     
     //useEffect for getting the logged in users  to do's andsetting them to{ toDos}
 
     useEffect(()=>{
-        Axios.get(url)
+        axios.get(url)
         .then((res)=>{
             setToDos([...toDos,res.data])
     
@@ -61,10 +60,18 @@ export default function UserhomePage(props) {
             // alert('An error happened while loading To Do')
     
         })
-    },[])
+    },[toDos])
 
     const addTodo = newTodo =>{
-        setToDos([...toDos,newTodo])
+        axios.post('https://reqres.in/api/users',newTodo)
+        .then(res =>{
+        setToDos([...toDos,res.data])
+        console.log('success')
+
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
 
     const showAside = evt=>{
@@ -84,7 +91,11 @@ export default function UserhomePage(props) {
             <Switch>
                   <Route >
                         <div className='asideDiv'>
-                            {!asideShow ? <Button onClick={showAside} >show menu</Button> : <UserAside addTodo={addTodo} />}
+                            {!asideShow ? <Button onClick={showAside} >show menu</Button> :
+                             <UserAside
+                             userLoggedIn={userLoggedIn} 
+                             addTodo={addTodo}
+                              />}
                             
                             {asideShow ? <Button onClick={showAside}>hide menu</Button>:null}
                             
@@ -98,7 +109,7 @@ export default function UserhomePage(props) {
                                 return (  
                                             
                                                  
-                                <Todos todoInfo={todo} userLoggedIn={userLoggedIn}/>
+                                <Todos todoInfo={todo} setpost={setpost} userLoggedIn={userLoggedIn}/>
                                                  
                                 )
                                 })}
